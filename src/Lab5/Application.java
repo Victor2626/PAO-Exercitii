@@ -36,5 +36,20 @@ public class Application {
         System.out.println(ex9.matches("[abc]{5,}"));
         System.out.println(ex10.matches("[abc]{5,10}"));
 
+        String test="Odata creat un sir de caractere cu continutul sau nu mai poate fi modificat.",aux=test;
+        //1)
+        System.out.println(test.length());
+        //2)
+        test=test.replaceAll("[ ]","");
+        test=test.replaceAll("[.]","");
+        System.out.println(test.matches("[a-zA-Z]+"));
+        //3)
+        String[] cuv=aux.split("[ ]");
+        System.out.println(cuv[cuv.length/2-1]);
+        //4)
+        StringBuilder s=new StringBuilder(aux);
+        s=s.reverse();
+        System.out.println(s);
+
     }
 }
