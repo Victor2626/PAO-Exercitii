@@ -30,18 +30,6 @@ public class UserService {
         databaseService.createUser(id, name, email, password, address, discountRate);
     }
 
-//    private String getUserInput(Scanner scanner, String prompt, String errorMessage) {
-//        String input = "";
-//        while (input == null || input.trim().isEmpty()) {
-//            System.out.print(prompt);
-//            input = scanner.nextLine();
-//            if (input == null || input.trim().isEmpty()) {
-//                System.out.println(errorMessage);
-//            }
-//        }
-//        return input;
-//    }
-
 //    private double getDiscountRate(Scanner scanner) {
 //        double discountRate = -1;
 //        while (discountRate < 0) {
@@ -61,13 +49,14 @@ public class UserService {
 //        return discountRate;
 //    }
 
+
     public void viewUser(Scanner scanner) throws SQLException {
-        System.out.println("Enter the city of the location to find:");
+        System.out.println("Enter the id of the livrator to find:");
         Integer id = Integer.valueOf(scanner.nextLine());
         databaseService.getUserById(id);
     }
     public void removeUser(Scanner scanner) throws SQLException {
-        System.out.println("Enter the name of the user to remove:");
+        System.out.println("Enter the id of the user to remove:");
         Integer id = Integer.valueOf(scanner.nextLine());
         databaseService.removeUser(id);
     }
@@ -89,25 +78,8 @@ public class UserService {
         databaseService.updateUser(id, existingUser);
         System.out.println("User updated successfully.");
     }
-    }
+}
 
-//    public void updateUser(Scanner scanner) throws SQLException {
-//        System.out.print("Enter user ID for update: ");
-//        Integer id = scanner.nextInt();
-//        scanner.nextLine();
-//        User existingUser = userRepositoryService.getUserById(id);
-//        if (existingUser == null) {
-//            System.out.println("User not found.");
-//            return;
-//        }
-//        System.out.println("Updating User:");
-//        String newAddress = getUserInput(scanner, "Enter new address: ", "Address cannot be empty. Please enter a valid address.");
-//        double newDiscountRate = getDiscountRate(scanner);
-//        existingUser.setAddress(newAddress);
-//        existingUser.setDiscountRate(newDiscountRate);
-//        userRepositoryService.updateUser(id, existingUser);
-//        System.out.println("User updated successfully.");
-//    }
 
 
 

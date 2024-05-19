@@ -10,6 +10,10 @@ public class Livrator {
         this.estimatedDeliveryTime = estimatedDeliveryTime;
     }
 
+    public Livrator() {
+
+    }
+
     public int getId() {
         return id;
     }

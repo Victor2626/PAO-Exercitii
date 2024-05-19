@@ -2,97 +2,53 @@ package proiect.services;
 
 import proiect.daoservices.LivratorRepositoryService;
 import proiect.model.Livrator;
-import proiect.model.User;
-
+import static proiect.utils.Constants.AUDIT_FILE;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.List;
 
 public class LivratorService {
-    private LivratorRepositoryService livratorRepositoryService;
+    private LivratorRepositoryService databaseService;
 
-    public LivratorService() {
-        this.livratorRepositoryService = new LivratorRepositoryService();
+    public LivratorService(LivratorRepositoryService databaseService) {
+        this.databaseService = databaseService;
     }
 
-    public void createLivrator(Scanner scanner) {
-        System.out.println("Creating a new Delivery Person:");
-        String name = getLivratorName(scanner);
-        int estimatedDeliveryTime = getEstimatedDeliveryTime(scanner);
-        Livrator livrator = new Livrator(0, name, estimatedDeliveryTime);
-        livratorRepositoryService.addLivrator(livrator);
-        System.out.println("Delivery Person created successfully.");
+    public void createLivrator(Scanner scanner) throws SQLException {
+        System.out.println("Enter livrator details:");
+        System.out.println("Id:");
+        Integer id = Integer.valueOf(scanner.nextLine());
+        System.out.println("Name:");
+        String name = scanner.nextLine();
+        System.out.println("EstimatedDeliveryTime:");
+        Integer estimatedDeliveryTime = Integer.valueOf(scanner.nextLine());
+        databaseService.createLivrator(id, name, estimatedDeliveryTime);
     }
 
-    private String getLivratorName(Scanner scanner) {
-        String name = "";
-        while (name == null || name.trim().isEmpty()) {
-            System.out.print("Enter delivery person's name: ");
-            name = scanner.nextLine();
-            if (name == null || name.trim().isEmpty()) {
-                System.out.println("Delivery person's name cannot be empty. Please enter a valid name.");
-            }
-        }
-        return name;
+    public void viewLivrator(Scanner scanner) throws SQLException {
+        System.out.println("Enter the id of the livrator to find:");
+        Integer id = Integer.valueOf(scanner.nextLine());
+        databaseService.getLivratorById(id);
     }
-
-    private int getEstimatedDeliveryTime(Scanner scanner) {
-        int estimatedDeliveryTime = 0;
-        while (estimatedDeliveryTime <= 0) {
-            System.out.print("Enter estimated delivery time (in minutes): ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("That's not a valid number. Please enter a valid estimated delivery time.");
-                scanner.next();
-                System.out.print("Enter estimated delivery time (in minutes): ");
-            }
-            estimatedDeliveryTime = scanner.nextInt();
-            scanner.nextLine();
-            if (estimatedDeliveryTime <= 0) {
-                System.out.println("Estimated delivery time must be greater than 0. Please enter a valid time.");
-            }
-        }
-        return estimatedDeliveryTime;
+    public void removeLivrator(Scanner scanner) throws SQLException {
+        System.out.println("Enter the id of the livrator to remove:");
+        Integer id = Integer.valueOf(scanner.nextLine());
+        databaseService.removeLivrator(id);
     }
-
-    public void viewLivrator(Scanner scanner) {
-        System.out.print("Enter delivery person's ID to view details: ");
-        int id = scanner.nextInt();
-        Livrator livrator = livratorRepositoryService.getLivratorById(id);
-        if (livrator != null) {
-            System.out.println(livrator);
-        } else {
-            System.out.println("Delivery Person not found.");
-        }
-    }
-
-    public void updateLivrator(Scanner scanner) {
-        System.out.println("Updating a Delivery Person:");
-        System.out.print("Enter delivery person's ID: ");
-        int id = scanner.nextInt();
-        Livrator existingLivrator = livratorRepositoryService.getLivratorById(id);
+    public void updateLivrator(Scanner scanner) throws SQLException {
+        System.out.print("Enter livrator ID for update: ");
+        Integer id = Integer.valueOf(scanner.nextLine());
+        Livrator existingLivrator = databaseService.getLivratorById(id);
         if (existingLivrator == null) {
-            System.out.println("Delivery Person not found.");
+            System.out.println("Livrator not found.");
             return;
         }
-        int newEstimatedDeliveryTime = getEstimatedDeliveryTime(scanner);
+        System.out.println("Updating Livrator:");
+        System.out.println("Enter new estimatedDeliveryTime:");
+        Integer newEstimatedDeliveryTime = Integer.valueOf(scanner.nextLine());
         existingLivrator.setEstimatedDeliveryTime(newEstimatedDeliveryTime);
-        livratorRepositoryService.updateLivrator(id, existingLivrator);
-        System.out.println("Delivery Person updated successfully.");
-    }
-
-    public void deleteLivrator(Scanner scanner) {
-        System.out.println("Deleting a Delivery Person:");
-        System.out.print("Enter delivery person's ID: ");
-        int id = scanner.nextInt();
-        Livrator livrator = livratorRepositoryService.getLivratorById(id);
-        if (livrator != null) {
-            livratorRepositoryService.removeLivrator(livrator);
-            System.out.println("Delivery Person deleted successfully.");
-        } else {
-            System.out.println("Delivery Person not found.");
-        }
-    }
-    public Livrator getLivratorById(int livratorId) {
-        return livratorRepositoryService.getLivratorById(livratorId);
+        databaseService.updateLivrator(id, existingLivrator);
+        System.out.println("User updated successfully.");
     }
 }
 
