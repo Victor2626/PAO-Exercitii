@@ -6,7 +6,10 @@ import proiect.dao.RestaurantDao;
 import java.util.List;
 
 public class RestaurantRepositoryService {
-    private final RestaurantDao restaurantDao = new RestaurantDao();
+    private RestaurantDao restaurantDao;
+    public RestaurantRepositoryService(){
+        this.restaurantDao = new RestaurantDao();
+    }
 
     public void addRestaurant(Restaurant restaurant) {
         restaurantDao.createRestaurant(restaurant);

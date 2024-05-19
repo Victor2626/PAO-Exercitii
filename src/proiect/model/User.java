@@ -16,6 +16,10 @@ public class User {
         this.discountRate = discountRate;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -63,4 +67,15 @@ public class User {
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
     }
+    @Override
+    public String toString() {
+        return "User:" + '\n' +
+                "Id: " + getId() + '\n' +
+                "Name: " + getName() + '\n' +
+                "Email: " + getEmail() + '\n' +
+                "Password: " + getPassword() + '\n' +
+                "Address: " + getAddress() + '\n' +
+                "DiscountRate: " + getDiscountRate() + '\n';
+    }
+
 }

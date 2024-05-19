@@ -43,4 +43,12 @@ public class Recenzie {
     public void setRating(int rating) {
         this.rating = rating;
     }
+    @Override
+    public String toString() {
+        return "Recenzie:" + '\n' +
+                "Id: " + getId() + '\n' +
+                "User: " + getUser() + '\n' +
+                "Coomment: " + getComment() + '\n' +
+                "Rating: " + getRating() + '\n';
+    }
 }

@@ -26,7 +26,39 @@ public class RestaurantService {
         restaurantRepositoryService.addRestaurant(restaurant);
         System.out.println("Restaurant created successfully.");
     }
+    public void updateRestaurant(Scanner scanner) {
+        System.out.print("Enter restaurant ID for update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Restaurant existingRestaurant = restaurantRepositoryService.getRestaurantById(id);
+        if (existingRestaurant == null) {
+            System.out.println("Restaurant not found.");
+            return;
+        }
 
+        System.out.println("Updating Restaurant:");
+        String name = getRestaurantName(scanner);
+        String address = getRestaurantAddress(scanner);
+        Map<Mancare, Boolean> menu = getRestaurantMenu(scanner);
+        int averagePreparationTime = getAveragePreparationTime(scanner);
+        Set<Recenzie> recenzii = getRestaurantReviews(scanner);
+        Restaurant restaurantUpdated = new Restaurant(id, name, address, menu, averagePreparationTime, recenzii);
+        restaurantRepositoryService.updateRestaurant(id, restaurantUpdated);
+        System.out.println("Restaurant updated successfully.");
+    }
+
+    public void deleteRestaurant(Scanner scanner) {
+        System.out.print("Enter restaurant ID to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Restaurant restaurant = restaurantRepositoryService.getRestaurantById(id);
+        if (restaurant != null) {
+            restaurantRepositoryService.removeRestaurant(restaurant);
+            System.out.println("Restaurant deleted successfully.");
+        } else {
+            System.out.println("Restaurant not found.");
+        }
+    }
 
 
     private String getRestaurantName(Scanner scanner) {
@@ -122,9 +154,31 @@ public class RestaurantService {
         }
         return reviews;
     }
-
-
-
+    public void viewRestaurant(Scanner scanner) {
+        System.out.print("Enter restaurant ID to view details: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Restaurant restaurant = restaurantRepositoryService.getRestaurantById(id);
+        if (restaurant != null) {
+            System.out.println(restaurant);
+        } else {
+            System.out.println("Restaurant not found.");
+        }
+    }
+    public Restaurant getRestaurantById(int restaurantId) {
+        return restaurantRepositoryService.getRestaurantById(restaurantId);
+    }
+    public Mancare getMancareById(int restaurantId, int mancareId) {
+        Restaurant restaurant = getRestaurantById(restaurantId);
+        if (restaurant != null) {
+            for (Mancare mancare : restaurant.getMenu().keySet()) {
+                if (mancare.getId() == mancareId) {
+                    return mancare;
+                }
+            }
+        }
+        return null;
+    }
 }
 
 

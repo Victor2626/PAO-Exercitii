@@ -6,7 +6,10 @@ import proiect.dao.LivratorDao;
 import java.util.List;
 
 public class LivratorRepositoryService {
-    private final LivratorDao livratorDao = new LivratorDao();
+    private LivratorDao livratorDao;
+    public LivratorRepositoryService(){
+        this.livratorDao = new LivratorDao();
+    }
 
     public void addLivrator(Livrator livrator) {
         livratorDao.createLivrator(livrator);

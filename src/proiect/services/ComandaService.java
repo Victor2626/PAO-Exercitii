@@ -19,11 +19,11 @@ public class ComandaService{
             }
         }
         if(stareComanda==false) {
-            comanda.setStatus("Nefinalizat");
+            comanda.setStatus("Cancelled");
             System.out.println("Comanda nu a putut fi finalizata!");
         }
         else {
-            comanda.setStatus("In curs de preparare");
+            comanda.setStatus("Pending");
             System.out.println("Comanda este in curs de preparare!");
         }
 

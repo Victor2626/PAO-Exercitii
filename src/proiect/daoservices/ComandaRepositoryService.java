@@ -7,7 +7,10 @@ import java.util.List;
 
 public class ComandaRepositoryService {
 
-    private final ComandaDao comandaDao = new ComandaDao();
+    private ComandaDao comandaDao;
+    public ComandaRepositoryService(){
+        this.comandaDao = new ComandaDao();
+    }
 
     public void addComanda(Comanda comanda) {
         comandaDao.createComanda(comanda);

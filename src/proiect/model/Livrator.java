@@ -33,4 +33,11 @@ public class Livrator {
     public void setEstimatedDeliveryTime(int estimatedDeliveryTime) {
         this.estimatedDeliveryTime = estimatedDeliveryTime;
     }
+    @Override
+    public String toString() {
+        return "Livrator:" + '\n' +
+                "Id: " + getId() + '\n' +
+                "Name: " + getName() + '\n' +
+                "EstimatedDeliveryTime: " + getEstimatedDeliveryTime() + '\n';
+    }
 }

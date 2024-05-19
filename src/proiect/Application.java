@@ -1,17 +1,20 @@
 package proiect;
 
+import proiect.daoservices.UserRepositoryService;
 import proiect.services.*;
+import proiect.model.*;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        ComandaService comandaService = new ComandaService();
         LivratorService livratorService = new LivratorService();
-        PromotieService promotieService = new PromotieService();
-        RestaurantService restaurantService = new RestaurantService();
-        UserService userService = new UserService();
+        UserRepositoryService userRepositoryService = new UserRepositoryService();
+        UserService userService = new UserService(userRepositoryService);
 
         while (true){
             menu();
@@ -22,14 +25,14 @@ public class Application {
                 case "create":
                     userService.createUser(scanner);
                     break;
-                case "view":
+                case "read":
                     userService.viewUser(scanner);
                     break;
                 case "delete":
-                    userService.deleteUser(scanner);
+                    userService.updateUser(scanner);
                     break;
                 case "update":
-                    userService.updateUser(scanner);
+                    userService.removeUser(scanner);
                     break;
                 case "quit":
                     System.out.println("Exiting");
@@ -47,7 +50,6 @@ public class Application {
         System.out.println("update");
         System.out.println("delete");
         System.out.println("quit");
-        System.out.println("get");
         System.out.println("Enter command:");
     }
 }

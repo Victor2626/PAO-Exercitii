@@ -7,7 +7,10 @@ import proiect.model.Masina;
 import java.util.List;
 
 public class AutoturismRepositoryService {
-    private final MasinaDao masinaDao = new MasinaDao();
+    private MasinaDao masinaDao;
+    public AutoturismRepositoryService(){
+        this.masinaDao = new MasinaDao();
+    }
 
     public void addAutoturism(Masina masina) {
         masinaDao.createMasina(masina);

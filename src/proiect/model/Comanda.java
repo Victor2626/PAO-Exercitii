@@ -65,4 +65,14 @@ public class Comanda {
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
+    @Override
+    public String toString() {
+        return "Comanda:" + '\n' +
+                "Id: " + getId() + '\n' +
+                "User: " + getUser() + '\n' +
+                "Restaurant: " + getRestaurant() + '\n' +
+                "Items: " + getItems() + '\n' +
+                "Status: " + getStatus() + '\n' +
+                "OrderDate: " + getOrderDate() + '\n';
+    }
 }

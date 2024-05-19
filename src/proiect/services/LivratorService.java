@@ -2,6 +2,7 @@ package proiect.services;
 
 import proiect.daoservices.LivratorRepositoryService;
 import proiect.model.Livrator;
+import proiect.model.User;
 
 import java.util.Scanner;
 import java.util.List;
@@ -89,6 +90,9 @@ public class LivratorService {
         } else {
             System.out.println("Delivery Person not found.");
         }
+    }
+    public Livrator getLivratorById(int livratorId) {
+        return livratorRepositoryService.getLivratorById(livratorId);
     }
 }
 

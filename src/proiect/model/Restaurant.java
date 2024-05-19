@@ -69,4 +69,14 @@ public class Restaurant {
     public void setRecenzii(Set<Recenzie> recenzii) {
         Recenzii = recenzii;
     }
+    @Override
+    public String toString() {
+        return "Restaurant:" + '\n' +
+                "Id: " + getId() + '\n' +
+                "Name: " + getName() + '\n' +
+                "Address: " + getAddress() + '\n' +
+                "Menu: " + getMenu() + '\n' +
+                "AveragePreparationTime: " + getAveragePreparationTime() + '\n' +
+                "Recenzii: " + getRecenzii() + '\n';
+    }
 }

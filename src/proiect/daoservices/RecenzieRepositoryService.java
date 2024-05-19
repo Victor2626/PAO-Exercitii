@@ -6,7 +6,10 @@ import proiect.dao.RecenzieDao;
 import java.util.List;
 
 public class RecenzieRepositoryService {
-    private final RecenzieDao recenzieDao = new RecenzieDao();
+    private RecenzieDao recenzieDao;
+    public RecenzieRepositoryService(){
+        this.recenzieDao = new RecenzieDao();
+    }
 
     public void addRecenzie(Recenzie recenzie) {
         recenzieDao.createRecenzie(recenzie);

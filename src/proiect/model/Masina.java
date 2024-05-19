@@ -26,4 +26,10 @@ public class Masina extends Autoturism {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
+    @Override
+    public String toString() {
+        return "Masina:" + '\n' +
+                "Color: " + getColor() + '\n' +
+                "LicensePlate: " + getLicensePlate() + '\n';
+    }
 }
