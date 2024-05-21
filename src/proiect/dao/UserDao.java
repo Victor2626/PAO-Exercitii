@@ -61,7 +61,7 @@ public class UserDao implements DaoInterface<User> {
     @Override
     public void update(Integer id, User user)  throws SQLException{
         String sql = "UPDATE demo.user u set u.name = ? , u.email = ?" +
-                " , u.password = ? , u.adress = ?, u.discountRate = ? where u.id = ?";
+                " , u.password = ? , u.address = ?, u.discountRate = ? where u.id = ?";
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
             preparedStatement.setString(1, user.getName());
